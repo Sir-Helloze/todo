@@ -1,130 +1,49 @@
-const todos = document.querySelectorAll(".todo");
-const all_status = document.querySelectorAll(".status");
-let draggableTodo = null;
-
-todos.forEach((todo) => {
-  todo.addEventListener("dragstart", dragStart);
-  todo.addEventListener("dragend", dragEnd);
-});
-
-function dragStart() {
-  draggableTodo = this;
-  setTimeout(() => {
-    this.style.display = "none";
-  }, 0);
-  console.log("dragStart");
+var list = document.querySelector('ul');
+var todos;
+function toLocal(){
+    todos = list.innerHTML;
+    localStorage.setItem('todos', todos);
 }
+// в переменную todos буду получать содержимое list
 
-function dragEnd() {
-  draggableTodo = null;
-  setTimeout(() => {
-    this.style.display = "block";
-  }, 0);
-  console.log("dragEnd");
+list.addEventListener('click', function (ev){
+    if (ev.target.tagName === "LI"){
+        ev.target.classList.toggle('checked');
+        toLocal();
+    }
+    else if(ev.target.tagName === "SPAN"){
+        var div = ev.target.parentNode;
+        div.remove();
+        toLocal();
+    }
+}, false);
+// произвожу делегирование событий
+// определяю по какому именно элементу поизведен click
+// если это элемент списка LI то тогда он принимает класс checked - дело выполнено
+// иначе же если нажат крестик, производится полное удаление дела
+
+function newElement(){
+    var li = document.createElement('li');
+    var inputValue = document.getElementById('toDoEl').value;
+    var text = document.createTextNode(inputValue);
+    li.appendChild(text);
+    if (inputValue == ""){
+        alert("придумайте себе дело!");
+    } 
+    else{
+        document.getElementById('list').appendChild(li);
+    }
+    document.getElementById('toDoEl').value = "";
+    
+    var span = document.createElement('SPAN');
+    var icon = document.createTextNode('╳');
+    span.className = "close";
+    span.appendChild(icon);
+    li.appendChild(span);
+    toLocal();
 }
-
-all_status.forEach((status) => {
-  status.addEventListener("dragover", dragOver);
-  status.addEventListener("dragenter", dragEnter);
-  status.addEventListener("dragleave", dragLeave);
-  status.addEventListener("drop", dragDrop);
-});
-
-function dragOver(e) {
-  e.preventDefault();
-  //   console.log("dragOver");
+// создаю элементы которые будут добавляться в LIST
+if(localStorage.getItem('todos')){
+    list.innerHTML = localStorage.getItem('todos');
 }
-
-function dragEnter() {
-  this.style.border = "1px dashed #ccc";
-  console.log("dragEnter");
-}
-
-function dragLeave() {
-  this.style.border = "none";
-  console.log("dragLeave");
-}
-
-function dragDrop() {
-  this.style.border = "none";
-  this.appendChild(draggableTodo);
-  console.log("dropped");
-}
-
-/* modal */
-const btns = document.querySelectorAll("[data-target-modal]");
-const close_modals = document.querySelectorAll(".close-modal");
-const overlay = document.getElementById("overlay");
-
-btns.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    document.querySelector(btn.dataset.targetModal).classList.add("active");
-    overlay.classList.add("active");
-  });
-});
-
-close_modals.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    const modal = btn.closest(".modal");
-    modal.classList.remove("active");
-    overlay.classList.remove("active");
-  });
-});
-
-window.onclick = (event) => {
-  if (event.target == overlay) {
-    const modals = document.querySelectorAll(".modal");
-    modals.forEach((modal) => modal.classList.remove("active"));
-    overlay.classList.remove("active");
-  }
-};
-
-/*create*/
-const todo_submit = document.getElementById('todo_submit');
-
-todo_submit.addEventListener("click", createTodo);
-
-function createTodo(){
-    const todo_div = document.createElement("div");
-    const input_val = document.getElementById("todo_input").value;
-    const txt = document.createTextNode(input_val);
-
-    todo_div.appendChild(txt);
-    todo_div.classList.add("todo");
-    todo_div.setAttribute("draggable", "true");
-
-    /*create span*/
-    const span = document.createElement("span");
-    const span_txt = document.createTextNode("\u00D7");
-    span.classList.add("close");
-    span.appendChild(span_txt);
-
-    todo_div.appendChild(span);
-
-
-    no_status.appendChild(todo_div);
-
-    span.addEventListener("click", ()=>{
-        span.parentElement.style.display = "none";
-    });
-    // console.log(todo_div);
-
-    todo_div.addEventListener("dragstart", dragStart);
-    todo_div.addEventListener("dragend", dragEnd);
-
-    document.getElementById("todo_input").value = "";
-    todo_form.classList.remove("active");
-    overlay.classList.remove("active");
-    save();
-}
-
-const close_btns = document.querySelectorAll(".close");
-
-close_btns.forEach(btn => {
-    btn.addEventListener("click", ()=>{
-        btn.parentElement.style.display = "none";
-    });
-});
-function save() {
-    localStorage.setItem('save', document.querySelector('.status').innerHTML);
-}
+// проверяю есть ли у меня значение данного ключа
