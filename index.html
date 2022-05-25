@@ -1,39 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToDoList</title>
+    <title>Document</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
 </head>
 <body>
-    <div class="modal" id="todo_form">
+    <div class="wrapper">
         <div class="header">
-          <div class="title">create tasck</div>
-          <button class="btn close-modal">&times;</button>
+            <h1>список дел</h1>
+            <input type="text" placeholder="добавить дело.." id="toDoEl">
+            <span class="addBtn" onclick="newElement()">добавить</span>
         </div>
-        <div class="body">
-          <input type="text" id="todo_input" />
-          <input type="submit" value="create tasck" id="todo_submit" />
-        </div>
-      </div>
-    <div class="todo-container" >
-        <div class="status" id="no_status">
-            <h1>add</h1>
-            <button id="add_btn" data-target-modal="#todo_form">+ add tasck</button>
-        </div>
-        <div class="status">
-            <h1>not started</h1>
-        </div>
-        <div class="status">
-            <h1>in progress</h1>
-        </div>
-        <div class="status">
-            <h1>ready</h1>
-        </div>
+        <ul id="list"></ul>
     </div>
-    <div id="overlay"></div>
-<script src="assets/js/script.js"></script>
+
+
+
+    <script src="assets/js/script.js"></script>
 </body>
 </html>
