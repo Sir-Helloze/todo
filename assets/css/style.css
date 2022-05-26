@@ -1,6 +1,9 @@
 * {
     box-sizing: border-box;
 }
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 .wrapper {width: 920px; margin: 0 auto}
 ul {
     margin: 10px;
@@ -87,7 +90,7 @@ input {
     border-radius: 10px;
 }
 
-.addBtn {
+#addBtn {
     padding: 10px;
     width: 20%;
     background: #d9d9d9;
@@ -101,6 +104,33 @@ input {
     border-radius: 10px;
 }
 
-.addBtn:hover {
+#addBtn:hover {
     background-color: #bbb;
+}
+.readyBtn{
+    padding: 10px;
+    width: 20%;
+    background: #d9d9d9;
+    color: #555;
+    float: left;
+    margin-left: 5%;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+.delBtn{
+    padding: 10px;
+    width: 20%;
+    background: #d9d9d9;
+    color: #555;
+    float: left;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 10px;
+    margin-top: 10px;
 }
