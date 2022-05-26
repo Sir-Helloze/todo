@@ -47,3 +47,21 @@ if(localStorage.getItem('todos')){
     list.innerHTML = localStorage.getItem('todos');
 }
 // проверяю есть ли у меня значение данного ключа
+function delElement(){
+    localStorage.clear();
+    location.reload();
+}
+// произвожу удаление всех li из list
+function readyEl() {
+    var li = document.querySelectorAll('li');
+    for (var i = 0; i < li.length; i++){
+    li[i].classList.add('checked');
+    }
+    toLocal();
+}
+// функция отвечающая за перенос всех задач в состояние готово
+
+
+
+function usl(e) { if(e.keyCode == 13) document.enter.input(); }
+    
