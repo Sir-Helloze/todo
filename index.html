@@ -11,12 +11,17 @@
 <body>
     <div class="wrapper">
         <div class="header">
-            <h1>список дел</h1>
-            <input type="text" placeholder="добавить дело.." id="toDoEl">
-            <span class="addBtn" onclick="newElement()">добавить</span>
+            <h1>to-do list</h1>
+            <input type="text" placeholder="add task.." id="toDoEl" onkeypress="usl(event)">
+            <input type="submit" onclick="newElement()" value="add" id="addBtn" onkeypress="usl(event)">
+            <span class="delBtn" onclick="delElement()">delete all</span><br>
+            <span class="readyBtn" onclick="readyEl()">all ready</span><br>
+
+
         </div>
         <ul id="list"></ul>
     </div>
+
 
 
 
